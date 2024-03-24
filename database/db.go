@@ -13,11 +13,7 @@ import (
 )
 
 var (
-	host     = os.Getenv("PGHOST")
-	dbPort   = os.Getenv("PGPORT")
-	user     = os.Getenv("PGUSER")
-	dbName   = os.Getenv("PGDATABASE")
-	password = os.Getenv("PGPASSWORD")
+	
 	db       *gorm.DB
 	err      error
 )
@@ -27,10 +23,9 @@ func StartDB() {
 	if errs != nil {
 		log.Fatalf("Some error occured. Err: %s", errs)
 	}
-	config := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable", host     ,dbPort   ,user     ,dbName   ,password )
-	con := config
+	config := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable",os.Getenv("PGHOST"), os.Getenv("PGPORT"), os.Getenv("PGUSER"), os.Getenv("PGDATABASE"), os.Getenv("PGPASSWORD"))
 
-	db, err = gorm.Open(postgres.Open(con), &gorm.Config{})
+	db, err = gorm.Open(postgres.Open(config), &gorm.Config{})
 
 	if err != nil {
 		log.Fatal("Error connecting to database: ", err)
