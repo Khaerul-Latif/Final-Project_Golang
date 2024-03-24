@@ -3,13 +3,15 @@ package router
 import (
 	"final-project/controllers"
 	"final-project/middlewares"
-
 	"github.com/gin-gonic/gin"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func StartApp() *gin.Engine {
 	r := gin.Default()
 
+	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	userRouter := r.Group("/users")
 	{
 		userRouter.POST("/register", controllers.UserRegister)

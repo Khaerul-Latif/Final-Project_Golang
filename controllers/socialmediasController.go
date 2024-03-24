@@ -11,6 +11,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Store godoc
+// @Summary      Create an socialMedia
+// @Description  create and store an socialMedia
+// @Tags         Social Media
+// @Accept       json
+// @Produce      json
+// @Param        json  body  models.SocialMedia true  "SocialMedia"
+// @Success      201  {object}  models.SocialMedia
+// @Security     Bearer
+// @Router       /socialmedias  [post]
 func SocialMediaCreate(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -46,6 +56,15 @@ func SocialMediaCreate(c *gin.Context) {
 	})
 }
 
+// Fetch godoc
+// @Summary      Fetch socialMedias
+// @Description  get socialMedias
+// @Tags         Social Media
+// @Accept       json
+// @Produce      json
+// @Success      200	{object}	[]models.SocialMedia
+// @Security     Bearer
+// @Router       /socialmedias  [get]
 func SocialMediaList(c *gin.Context) {
 	db := database.GetDB()
 	var Socmed []models.SocialMedia
@@ -85,6 +104,16 @@ func SocialMediaList(c *gin.Context) {
 	})
 }
 
+// Update godoc
+// @Summary      Update an socialMedia
+// @Description  update an socialMedia by ID
+// @Tags         Social Media
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "SocialMedia ID"
+// @Success      200  {string}  string
+// @Security     Bearer
+// @Router       /socialmedias/{id} [put]
 func SocialMediaUpdate(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -122,6 +151,16 @@ func SocialMediaUpdate(c *gin.Context) {
 	})
 }
 
+// Delete godoc
+// @Summary      Delete an socialMedia
+// @Description  delete an socialMedia by ID
+// @Tags         Social Media
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "SocialMedia ID"
+// @Success      200  {string}  string
+// @Security     Bearer
+// @Router       /socialmedias/{id} [delete]
 func SocialMediaDelete(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)

@@ -11,6 +11,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Store godoc
+// @Summary      Create an comment
+// @Description  create and store an comment
+// @Tags         Comment
+// @Accept       json
+// @Produce      json
+// @Param        json  body  models.Comment true  "Comment"
+// @Success      201  {object}  models.Comment
+// @Security     Bearer
+// @Router       /comments      [post]
 func CommentCreate(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -46,6 +56,15 @@ func CommentCreate(c *gin.Context) {
 	})
 }
 
+// Fetch godoc
+// @Summary      Fetch comments
+// @Description  get comments
+// @Tags         Comment
+// @Accept       json
+// @Produce      json
+// @Success      200	{object}	[]models.Comment
+// @Security     Bearer
+// @Router       /comments      [get]
 func CommentList(c *gin.Context) {
 	db := database.GetDB()
 	Comments := []models.Comment{}
@@ -90,6 +109,17 @@ func CommentList(c *gin.Context) {
 	c.JSON(http.StatusOK, data)
 }
 
+// Update godoc
+// @Summary      Update an comment
+// @Description  update an comment by ID
+// @Tags         Comment
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Comment ID"
+// @Param        json  body  models.Comment true  "Comment"
+// @Success      200  {object}  models.Photo
+// @Security     Bearer
+// @Router       /comments/{id} [put]
 func CommentUpdate(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -143,16 +173,19 @@ func CommentUpdate(c *gin.Context) {
 
 	}
 
-	// c.JSON(http.StatusOK, gin.H{
-	// 	"id":         Comment.ID,
-	// 	"message":    Comment.Message,
-	// 	"photo_id":   Comment.PhotoId,
-	// 	"user_id":    Comment.UserId,
-	// 	"updated_at": Comment.UpdatedAt,
-	// })
 	c.JSON(http.StatusOK, data)
 }
 
+// Delete godoc
+// @Summary      Delete an comment
+// @Description  delete an comment by ID
+// @Tags         Comment
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Comment ID"
+// @Success      200  {string}  string
+// @Security     Bearer
+// @Router       /comments/{id} [delete]
 func CommentDelete(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)

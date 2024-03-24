@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-
 	"github.com/joho/godotenv"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -21,7 +21,7 @@ func StartDB() {
 	if errs != nil {
 		log.Fatalf("Some error occured. Err: %s", errs)
 	}
-	config := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s", os.Getenv("HOST"), os.Getenv("PORT"), os.Getenv("USER"),os.Getenv("DBNAME"),os.Getenv("PASSWORD"), os.Getenv("SSLMODE"))
+	config := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable",os.Getenv("PGHOST") ,os.Getenv("PGPORT") ,os.Getenv("PGUSER") ,os.Getenv("PGDBNAME") ,os.Getenv("PGPASSWORD"))
 	con := config
 
 	db, err = gorm.Open(postgres.Open(con), &gorm.Config{})

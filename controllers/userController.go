@@ -14,6 +14,15 @@ import (
 
 var appJSON = "application/json"
 
+// Register godoc
+// @Summary      Create an user
+// @Description  create and store an user
+// @Tags         User
+// @Accept       json
+// @Produce      json
+// @Param        json  body   models.User   true  "User"
+// @Success      201  {object}   models.User
+// @Router       /users/register [post]
 func UserRegister(c *gin.Context) {
 	db := database.GetDB()
 	contentType := helpers.GetContentType(c)
@@ -66,6 +75,15 @@ func UserRegister(c *gin.Context) {
 	})
 }
 
+// Login godoc
+// @Summary      Show an user
+// @Description  get an user by ID
+// @Tags         User
+// @Accept       json
+// @Produce      json
+// @Param        json  body  models.User   true  "User"
+// @Success      200  {object}  models.User
+// @Router       /users/login	  [post]
 func UserLogin(c *gin.Context) {
 	db := database.GetDB()
 
@@ -110,6 +128,16 @@ func UserLogin(c *gin.Context) {
 
 }
 
+// Update godoc
+// @Summary      Update an user
+// @Description  update an user by ID
+// @Tags         User
+// @Accept       json
+// @Produce      json
+// @Param        json  body  models.User   true  "User"
+// @Success      200  {string}  models.User
+// @Security     Bearer
+// @Router       /users [put]
 func UserUpdate(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -181,6 +209,15 @@ func UserUpdate(c *gin.Context) {
 
 }
 
+// Delete godoc
+// @Summary      Delete an user
+// @Description  delete an user by ID
+// @Tags         User
+// @Accept       json
+// @Produce      json
+// @Success      200  {object}  []interface{}  "Your comment has been successfully deleted"
+// @Security     Bearer
+// @Router       /users					[delete]
 func UserDelete(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)

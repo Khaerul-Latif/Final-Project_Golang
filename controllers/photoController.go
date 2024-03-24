@@ -16,6 +16,16 @@ type User struct {
 	Username string `json:"username"`
 }
 
+// Store godoc
+// @Summary      Create an photo
+// @Description  create and store an photo
+// @Tags         Photo
+// @Accept       json
+// @Produce      json
+// @Param        json  body  models.Photo true  "Photo"
+// @Success      201  {object}  models.Photo
+// @Security     Bearer
+// @Router       /photos        [post]
 func PhotoCreate(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -52,6 +62,15 @@ func PhotoCreate(c *gin.Context) {
 	})
 }
 
+// Fetch godoc
+// @Summary      Fetch photos
+// @Description  get photos
+// @Tags         Photo
+// @Accept       json
+// @Produce      json
+// @Success      200	{object}	[]models.Photo
+// @Security     Bearer
+// @Router       /photos        [get]
 func PhotoGetAll(c *gin.Context) {
 	db := database.GetDB()
 	var Photos []models.Photo
@@ -91,6 +110,17 @@ func PhotoGetAll(c *gin.Context) {
 
 }
 
+// Update godoc
+// @Summary      Update an photo
+// @Description  update an photo by ID
+// @Tags         Photo
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Photo ID"
+// @Param        json  body  models.Photo true  "Photo"
+// @Success      200  {object}  models.Photo
+// @Security     Bearer
+// @Router       /photos/{id}   [put]
 func PhotoUpdate(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -129,6 +159,16 @@ func PhotoUpdate(c *gin.Context) {
 	})
 }
 
+// Delete godoc
+// @Summary      Delete an photo
+// @Description  delete an photo by ID
+// @Tags         Photo
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Photo ID"
+// @Success      200  {string}  string
+// @Security     Bearer
+// @Router       /photos/{id}   [delete]
 func PhotoDelete(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)

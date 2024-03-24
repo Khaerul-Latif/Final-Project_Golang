@@ -1,0 +1,449 @@
+basePath: /
+definitions:
+  models.Comment:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      message:
+        type: string
+      photo:
+        $ref: '#/definitions/models.Photo'
+      photo_id:
+        type: integer
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      user_id:
+        type: integer
+    type: object
+  models.Photo:
+    properties:
+      User:
+        $ref: '#/definitions/models.User'
+      caption:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      photo_url:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.SocialMedia:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      social_media_url:
+        type: string
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      user_id:
+        type: integer
+    type: object
+  models.User:
+    properties:
+      age:
+        type: integer
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: MyGram is a free photo sharing app written in Go. People can share,
+    view, and comment photos by everyone. Anyone can create an account by registering
+    an email address and selecting a username.
+  title: Final Project
+  version: "1.0"
+paths:
+  /comments:
+    get:
+      consumes:
+      - application/json
+      description: get comments
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Comment'
+            type: array
+      security:
+      - Bearer: []
+      summary: Fetch comments
+      tags:
+      - Comment
+    post:
+      consumes:
+      - application/json
+      description: create and store an comment
+      parameters:
+      - description: Comment
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/models.Comment'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Comment'
+      security:
+      - Bearer: []
+      summary: Create an comment
+      tags:
+      - Comment
+  /comments/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete an comment by ID
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Delete an comment
+      tags:
+      - Comment
+    put:
+      consumes:
+      - application/json
+      description: update an comment by ID
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Comment
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/models.Comment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+      security:
+      - Bearer: []
+      summary: Update an comment
+      tags:
+      - Comment
+  /photos:
+    get:
+      consumes:
+      - application/json
+      description: get photos
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Photo'
+            type: array
+      security:
+      - Bearer: []
+      summary: Fetch photos
+      tags:
+      - Photo
+    post:
+      consumes:
+      - application/json
+      description: create and store an photo
+      parameters:
+      - description: Photo
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/models.Photo'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Photo'
+      security:
+      - Bearer: []
+      summary: Create an photo
+      tags:
+      - Photo
+  /photos/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete an photo by ID
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Delete an photo
+      tags:
+      - Photo
+    put:
+      consumes:
+      - application/json
+      description: update an photo by ID
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Photo
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/models.Photo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+      security:
+      - Bearer: []
+      summary: Update an photo
+      tags:
+      - Photo
+  /socialmedias:
+    get:
+      consumes:
+      - application/json
+      description: get socialMedias
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.SocialMedia'
+            type: array
+      security:
+      - Bearer: []
+      summary: Fetch socialMedias
+      tags:
+      - Social Media
+    post:
+      consumes:
+      - application/json
+      description: create and store an socialMedia
+      parameters:
+      - description: SocialMedia
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/models.SocialMedia'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.SocialMedia'
+      security:
+      - Bearer: []
+      summary: Create an socialMedia
+      tags:
+      - Social Media
+  /socialmedias/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete an socialMedia by ID
+      parameters:
+      - description: SocialMedia ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Delete an socialMedia
+      tags:
+      - Social Media
+    put:
+      consumes:
+      - application/json
+      description: update an socialMedia by ID
+      parameters:
+      - description: SocialMedia ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Update an socialMedia
+      tags:
+      - Social Media
+  /users:
+    delete:
+      consumes:
+      - application/json
+      description: delete an user by ID
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Your comment has been successfully deleted
+          schema:
+            items:
+              type: object
+            type: array
+      security:
+      - Bearer: []
+      summary: Delete an user
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: update an user by ID
+      parameters:
+      - description: User
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      security:
+      - Bearer: []
+      summary: Update an user
+      tags:
+      - User
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: get an user by ID
+      parameters:
+      - description: User
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Show an user
+      tags:
+      - User
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: create and store an user
+      parameters:
+      - description: User
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Create an user
+      tags:
+      - User
+securityDefinitions:
+  Bearer:
+    description: Description for what is this security definition being used
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
