@@ -17,7 +17,8 @@ import (
 // @Tags         Comment
 // @Accept       json
 // @Produce      json
-// @Param        json  body  models.Comment true  "Comment"
+// @Param        message formData string true "Comments's Message"
+// @Param        photo_id formData int true "Comments's Photo ID"
 // @Success      201  {object}  models.Comment
 // @Security     Bearer
 // @Router       /comments      [post]
@@ -109,6 +110,57 @@ func CommentList(c *gin.Context) {
 	c.JSON(http.StatusOK, data)
 }
 
+// CommentByID godoc
+// @Summary      Get a comment by ID
+// @Description  Retrieve a comment by its ID
+// @Tags         Comment
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Comment ID"
+// @Success      200  {object}  models.Comment
+// @Security     Bearer
+// @Router       /comments/{commentId} [get]
+func CommentByID(c *gin.Context) {
+	db := database.GetDB()
+	commentID := c.Param("commentId")
+	var comment models.Comment
+	var data map[string]interface{}
+
+	if err := db.Preload("User").Preload("Photo").First(&comment, commentID).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Bad Request",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	user := make(map[string]interface{})
+	photo := make(map[string]interface{})
+
+	user["id"] = comment.User.ID
+	user["email"] = comment.User.Email
+	user["username"] = comment.User.Username
+
+	photo["id"] = comment.Photo.ID
+	photo["title"] = comment.Photo.Title
+	photo["caption"] = comment.Photo.Caption
+	photo["photo_url"] = comment.Photo.PhotoUrl
+	photo["user_id"] = comment.Photo.UserId
+
+	data = gin.H{
+		"id":         comment.ID,
+		"message":    comment.Message,
+		"photo_id":   comment.PhotoId,
+		"user_id":    comment.UserId,
+		"created_at": comment.CreatedAt,
+		"updated_at": comment.UpdatedAt,
+		"User":       user,
+		"Photo":      photo,
+	}
+
+	c.JSON(http.StatusOK, data)
+}
+
 // Update godoc
 // @Summary      Update an comment
 // @Description  update an comment by ID
@@ -116,10 +168,10 @@ func CommentList(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "Comment ID"
-// @Param        json  body  models.Comment true  "Comment"
+// @Param        message formData string true "Comments's Message"
 // @Success      200  {object}  models.Photo
 // @Security     Bearer
-// @Router       /comments/{id} [put]
+// @Router       /comments/{commentId} [put]
 func CommentUpdate(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -185,7 +237,7 @@ func CommentUpdate(c *gin.Context) {
 // @Param        id   path      int  true  "Comment ID"
 // @Success      200  {string}  string
 // @Security     Bearer
-// @Router       /comments/{id} [delete]
+// @Router       /comments/{commentId} [delete]
 func CommentDelete(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)

@@ -17,7 +17,8 @@ import (
 // @Tags         Social Media
 // @Accept       json
 // @Produce      json
-// @Param        json  body  models.SocialMedia true  "SocialMedia"
+// @Param        name formData string true "Social Media's Name"
+// @Param        social_media_url formData int true "Social Media's Social Media URL"
 // @Success      201  {object}  models.SocialMedia
 // @Security     Bearer
 // @Router       /socialmedias  [post]
@@ -56,6 +57,54 @@ func SocialMediaCreate(c *gin.Context) {
 	})
 }
 
+// GetSocialMediaByID godoc
+// @Summary      Get social media by ID
+// @Description  Retrieve social media by its ID
+// @Tags         Social Media
+// @Accept       json
+// @Produce      json
+// @Param        id   path   int  true  "Social Media ID"
+// @Success      200  {object}  models.SocialMedia
+// @Security     Bearer
+// @Router       /socialmedias/{socialMediaId} [get]
+func GetSocialMediaByID(c *gin.Context) {
+	db := database.GetDB()
+	var data map[string]interface{}
+	var socialMedia models.SocialMedia
+	socialMediaID, err := strconv.Atoi(c.Param("socialMediaId"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Bad Request",
+			"message": "Invalid social media ID",
+		})
+		return
+	}
+
+	if err := db.Preload("User").First(&socialMedia, socialMediaID).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"error":   "Not Found",
+			"message": "Social media not found",
+		})
+		return
+	}
+
+	user := make(map[string]interface{})
+
+	user["id"] = socialMedia.User.ID
+	user["email"] = socialMedia.User.Email
+	user["username"] = socialMedia.User.Username
+
+	data = map[string]interface{}{
+		"id":               socialMedia.ID,
+		"name":             socialMedia.Name,
+		"social_media_url": socialMedia.SocialMediaUrl,
+		"user_id":          socialMedia.UserId,
+		"user":             user,
+	}
+
+	c.JSON(http.StatusOK, data)
+}
+
 // Fetch godoc
 // @Summary      Fetch socialMedias
 // @Description  get socialMedias
@@ -91,17 +140,15 @@ func SocialMediaList(c *gin.Context) {
 		sosmed["id"] = Socmed[i].ID
 		sosmed["name"] = Socmed[i].Name
 		sosmed["social_media_url"] = Socmed[i].SocialMediaUrl
-		sosmed["UserId"] = Socmed[i].UserId
+		sosmed["user_id"] = Socmed[i].UserId
 		sosmed["created_at"] = Socmed[i].CreatedAt
 		sosmed["updated_at"] = Socmed[i].UpdatedAt
-		sosmed["User"] = user
+		sosmed["user"] = user
 
 		data = append(data, sosmed)
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"social_medias": data,
-	})
+	c.JSON(http.StatusOK, data)
 }
 
 // Update godoc
@@ -111,9 +158,11 @@ func SocialMediaList(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "SocialMedia ID"
+// @Param        name formData string true "Social Media's Name"
+// @Param        social_media_url formData int true "Social Media's Social Media URL"
 // @Success      200  {string}  string
 // @Security     Bearer
-// @Router       /socialmedias/{id} [put]
+// @Router       /socialmedias/{socialMediaId} [put]
 func SocialMediaUpdate(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
@@ -160,7 +209,7 @@ func SocialMediaUpdate(c *gin.Context) {
 // @Param        id   path      int  true  "SocialMedia ID"
 // @Success      200  {string}  string
 // @Security     Bearer
-// @Router       /socialmedias/{id} [delete]
+// @Router       /socialmedias/{socialMediaId} [delete]
 func SocialMediaDelete(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)

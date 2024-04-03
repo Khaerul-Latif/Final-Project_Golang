@@ -22,7 +22,9 @@ type User struct {
 // @Tags         Photo
 // @Accept       json
 // @Produce      json
-// @Param        json  body  models.Photo true  "Photo"
+// @Param        title formData string true "Photo's Title"
+// @Param        caption formData string true "Photo's Caption"
+// @Param        photo_url formData int true "Photo's Photo URL"
 // @Success      201  {object}  models.Photo
 // @Security     Bearer
 // @Router       /photos        [post]
@@ -110,6 +112,49 @@ func PhotoGetAll(c *gin.Context) {
 
 }
 
+// PhotoGetByID godoc
+// @Summary      Get a photo by ID
+// @Description  Retrieve a photo by its ID
+// @Tags         Photo
+// @Accept       json
+// @Produce      json
+// @Param        id   path      int  true  "Photo ID"
+// @Success      200  {object}  models.Photo
+// @Security     Bearer
+// @Router       /photos/{photoId}   [get]
+func PhotoGetByID(c *gin.Context) {
+	db := database.GetDB()
+	photoID := c.Param("photoId")
+	var photo models.Photo
+	var data map[string]interface{}
+
+	if err := db.Preload("User").First(&photo, photoID).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Bad Request",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	user := make(map[string]interface{})
+
+	user["email"] = photo.User.Email
+	user["username"] = photo.User.Username
+
+	data = map[string]interface{}{
+		"id":         photo.ID,
+		"title":      photo.Title,
+		"caption":    photo.Caption,
+		"photo_url":  photo.PhotoUrl,
+		"user_id":    photo.UserId,
+		"created_at": photo.CreatedAt,
+		"updated_at": photo.UpdatedAt,
+		"User":       user,
+	}
+
+	c.JSON(http.StatusOK, data)
+}
+
 // Update godoc
 // @Summary      Update an photo
 // @Description  update an photo by ID
@@ -117,11 +162,14 @@ func PhotoGetAll(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "Photo ID"
-// @Param        json  body  models.Photo true  "Photo"
+// @Param        title formData string true "Photo's Title"
+// @Param        caption formData string true "Photo's Caption"
+// @Param        photo_url formData int true "Photo's Photo URL"
 // @Success      200  {object}  models.Photo
 // @Security     Bearer
-// @Router       /photos/{id}   [put]
+// @Router       /photos/{photoId}   [put]
 func PhotoUpdate(c *gin.Context) {
+	var data map[string]interface{}
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)
 	contentType := helpers.GetContentType(c)
@@ -148,15 +196,14 @@ func PhotoUpdate(c *gin.Context) {
 		})
 		return
 	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"id":         Photo.ID,
-		"title":      Photo.Title,
-		"caption":    Photo.Caption,
-		"photo_url":  Photo.PhotoUrl,
-		"user_id":    Photo.UserId,
-		"updated_at": Photo.UpdatedAt,
-	})
+	data = map[string]interface{}{
+		"id":        Photo.ID,
+		"title":     Photo.Title,
+		"caption":   Photo.Caption,
+		"photo_url": Photo.PhotoUrl,
+		"user_id":   Photo.UserId,
+	}
+	c.JSON(http.StatusOK, data)
 }
 
 // Delete godoc
@@ -168,7 +215,7 @@ func PhotoUpdate(c *gin.Context) {
 // @Param        id   path      int  true  "Photo ID"
 // @Success      200  {string}  string
 // @Security     Bearer
-// @Router       /photos/{id}   [delete]
+// @Router       /photos/{photoId}   [delete]
 func PhotoDelete(c *gin.Context) {
 	db := database.GetDB()
 	userData := c.MustGet("userData").(jwt.MapClaims)

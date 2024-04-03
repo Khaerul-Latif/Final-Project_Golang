@@ -64,13 +64,18 @@ const docTemplate = `{
                 "summary": "Create an comment",
                 "parameters": [
                     {
-                        "description": "Comment",
-                        "name": "json",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Comment"
-                        }
+                        "type": "string",
+                        "description": "Comments's Message",
+                        "name": "message",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Comments's Photo ID",
+                        "name": "photo_id",
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -83,7 +88,42 @@ const docTemplate = `{
                 }
             }
         },
-        "/comments/{id}": {
+        "/comments/{commentId}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "Retrieve a comment by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Get a comment by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Comment ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Comment"
+                        }
+                    }
+                }
+            },
             "put": {
                 "security": [
                     {
@@ -110,13 +150,11 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "description": "Comment",
-                        "name": "json",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Comment"
-                        }
+                        "type": "string",
+                        "description": "Comments's Message",
+                        "name": "message",
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -213,13 +251,25 @@ const docTemplate = `{
                 "summary": "Create an photo",
                 "parameters": [
                     {
-                        "description": "Photo",
-                        "name": "json",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Photo"
-                        }
+                        "type": "string",
+                        "description": "Photo's Title",
+                        "name": "title",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Photo's Caption",
+                        "name": "caption",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Photo's Photo URL",
+                        "name": "photo_url",
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -232,7 +282,42 @@ const docTemplate = `{
                 }
             }
         },
-        "/photos/{id}": {
+        "/photos/{photoId}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "Retrieve a photo by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Photo"
+                ],
+                "summary": "Get a photo by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Photo ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Photo"
+                        }
+                    }
+                }
+            },
             "put": {
                 "security": [
                     {
@@ -259,13 +344,25 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "description": "Photo",
-                        "name": "json",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Photo"
-                        }
+                        "type": "string",
+                        "description": "Photo's Title",
+                        "name": "title",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Photo's Caption",
+                        "name": "caption",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Photo's Photo URL",
+                        "name": "photo_url",
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -362,13 +459,18 @@ const docTemplate = `{
                 "summary": "Create an socialMedia",
                 "parameters": [
                     {
-                        "description": "SocialMedia",
-                        "name": "json",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.SocialMedia"
-                        }
+                        "type": "string",
+                        "description": "Social Media's Name",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Social Media's Social Media URL",
+                        "name": "social_media_url",
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -381,7 +483,42 @@ const docTemplate = `{
                 }
             }
         },
-        "/socialmedias/{id}": {
+        "/socialmedias/{socialMediaId}": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "description": "Retrieve social media by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Social Media"
+                ],
+                "summary": "Get social media by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Social Media ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.SocialMedia"
+                        }
+                    }
+                }
+            },
             "put": {
                 "security": [
                     {
@@ -405,6 +542,20 @@ const docTemplate = `{
                         "description": "SocialMedia ID",
                         "name": "id",
                         "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Social Media's Name",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Social Media's Social Media URL",
+                        "name": "social_media_url",
+                        "in": "formData",
                         "required": true
                     }
                 ],
@@ -473,13 +624,39 @@ const docTemplate = `{
                 "summary": "Update an user",
                 "parameters": [
                     {
-                        "description": "User",
-                        "name": "json",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.User"
-                        }
+                        "type": "string",
+                        "description": "User's Email",
+                        "name": "email",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's Username",
+                        "name": "username",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User's Age",
+                        "name": "age",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's Password",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's Profile Image URL",
+                        "name": "profile_image_url",
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -536,13 +713,18 @@ const docTemplate = `{
                 "summary": "Show an user",
                 "parameters": [
                     {
-                        "description": "User",
-                        "name": "json",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.User"
-                        }
+                        "type": "string",
+                        "description": "User's Email",
+                        "name": "email",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's Username",
+                        "name": "username",
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -570,13 +752,39 @@ const docTemplate = `{
                 "summary": "Create an user",
                 "parameters": [
                     {
-                        "description": "User",
-                        "name": "json",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.User"
-                        }
+                        "type": "string",
+                        "description": "User's Email",
+                        "name": "email",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's Username",
+                        "name": "username",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "User's Age",
+                        "name": "age",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's Password",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User's Profile Image URL",
+                        "name": "profile_image_url",
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -691,6 +899,9 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "password": {
+                    "type": "string"
+                },
+                "profile_image_url": {
                     "type": "string"
                 },
                 "updated_at": {

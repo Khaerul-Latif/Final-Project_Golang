@@ -11,7 +11,7 @@ type Photo struct {
 	GormModel
 	Title    string `json:"title" gorm:"not null" form:"title" valid:"required~Title is required"`
 	Caption  string `json:"caption" form:"caption"`
-	PhotoUrl string `json:"photo_url" gorm:"not null" form:"photo_url" valid:"required~PhotoUrl is required"`
+	PhotoUrl string `json:"photo_url" gorm:"not null" form:"photo_url" valid:"required~PhotoUrl is required, url~Invalid URL format"`
 	UserId   uint   `json:"user_id" form:"user_id"`
 	User     *User  `json:"User"`
 }

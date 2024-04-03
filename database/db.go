@@ -13,9 +13,8 @@ import (
 )
 
 var (
-	
-	db       *gorm.DB
-	err      error
+	db  *gorm.DB
+	err error
 )
 
 func StartDB() {
@@ -23,7 +22,7 @@ func StartDB() {
 	if errs != nil {
 		log.Fatalf("Some error occured. Err: %s", errs)
 	}
-	config := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable",os.Getenv("PGHOST"), os.Getenv("PGPORT"), os.Getenv("PGUSER"), os.Getenv("PGDATABASE"), os.Getenv("PGPASSWORD"))
+	config := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable", os.Getenv("PGHOST"), os.Getenv("PGPORT"), os.Getenv("PGUSER"), os.Getenv("PGDATABASE"), os.Getenv("PGPASSWORD"))
 
 	db, err = gorm.Open(postgres.Open(config), &gorm.Config{})
 

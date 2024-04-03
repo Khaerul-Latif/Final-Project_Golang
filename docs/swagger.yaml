@@ -67,6 +67,8 @@ definitions:
         type: integer
       password:
         type: string
+      profile_image_url:
+        type: string
       updated_at:
         type: string
       username:
@@ -105,12 +107,16 @@ paths:
       - application/json
       description: create and store an comment
       parameters:
-      - description: Comment
-        in: body
-        name: json
+      - description: Comments's Message
+        in: formData
+        name: message
         required: true
-        schema:
-          $ref: '#/definitions/models.Comment'
+        type: string
+      - description: Comments's Photo ID
+        in: formData
+        name: photo_id
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -123,7 +129,7 @@ paths:
       summary: Create an comment
       tags:
       - Comment
-  /comments/{id}:
+  /comments/{commentId}:
     delete:
       consumes:
       - application/json
@@ -146,6 +152,28 @@ paths:
       summary: Delete an comment
       tags:
       - Comment
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a comment by its ID
+      parameters:
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Comment'
+      security:
+      - Bearer: []
+      summary: Get a comment by ID
+      tags:
+      - Comment
     put:
       consumes:
       - application/json
@@ -156,12 +184,11 @@ paths:
         name: id
         required: true
         type: integer
-      - description: Comment
-        in: body
-        name: json
+      - description: Comments's Message
+        in: formData
+        name: message
         required: true
-        schema:
-          $ref: '#/definitions/models.Comment'
+        type: string
       produces:
       - application/json
       responses:
@@ -198,12 +225,21 @@ paths:
       - application/json
       description: create and store an photo
       parameters:
-      - description: Photo
-        in: body
-        name: json
+      - description: Photo's Title
+        in: formData
+        name: title
         required: true
-        schema:
-          $ref: '#/definitions/models.Photo'
+        type: string
+      - description: Photo's Caption
+        in: formData
+        name: caption
+        required: true
+        type: string
+      - description: Photo's Photo URL
+        in: formData
+        name: photo_url
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -216,7 +252,7 @@ paths:
       summary: Create an photo
       tags:
       - Photo
-  /photos/{id}:
+  /photos/{photoId}:
     delete:
       consumes:
       - application/json
@@ -239,6 +275,28 @@ paths:
       summary: Delete an photo
       tags:
       - Photo
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a photo by its ID
+      parameters:
+      - description: Photo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Photo'
+      security:
+      - Bearer: []
+      summary: Get a photo by ID
+      tags:
+      - Photo
     put:
       consumes:
       - application/json
@@ -249,12 +307,21 @@ paths:
         name: id
         required: true
         type: integer
-      - description: Photo
-        in: body
-        name: json
+      - description: Photo's Title
+        in: formData
+        name: title
         required: true
-        schema:
-          $ref: '#/definitions/models.Photo'
+        type: string
+      - description: Photo's Caption
+        in: formData
+        name: caption
+        required: true
+        type: string
+      - description: Photo's Photo URL
+        in: formData
+        name: photo_url
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -291,12 +358,16 @@ paths:
       - application/json
       description: create and store an socialMedia
       parameters:
-      - description: SocialMedia
-        in: body
-        name: json
+      - description: Social Media's Name
+        in: formData
+        name: name
         required: true
-        schema:
-          $ref: '#/definitions/models.SocialMedia'
+        type: string
+      - description: Social Media's Social Media URL
+        in: formData
+        name: social_media_url
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -309,7 +380,7 @@ paths:
       summary: Create an socialMedia
       tags:
       - Social Media
-  /socialmedias/{id}:
+  /socialmedias/{socialMediaId}:
     delete:
       consumes:
       - application/json
@@ -332,6 +403,28 @@ paths:
       summary: Delete an socialMedia
       tags:
       - Social Media
+    get:
+      consumes:
+      - application/json
+      description: Retrieve social media by its ID
+      parameters:
+      - description: Social Media ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SocialMedia'
+      security:
+      - Bearer: []
+      summary: Get social media by ID
+      tags:
+      - Social Media
     put:
       consumes:
       - application/json
@@ -340,6 +433,16 @@ paths:
       - description: SocialMedia ID
         in: path
         name: id
+        required: true
+        type: integer
+      - description: Social Media's Name
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: Social Media's Social Media URL
+        in: formData
+        name: social_media_url
         required: true
         type: integer
       produces:
@@ -378,12 +481,31 @@ paths:
       - application/json
       description: update an user by ID
       parameters:
-      - description: User
-        in: body
-        name: json
+      - description: User's Email
+        in: formData
+        name: email
         required: true
-        schema:
-          $ref: '#/definitions/models.User'
+        type: string
+      - description: User's Username
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: User's Age
+        in: formData
+        name: age
+        required: true
+        type: integer
+      - description: User's Password
+        in: formData
+        name: password
+        required: true
+        type: string
+      - description: User's Profile Image URL
+        in: formData
+        name: profile_image_url
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -402,12 +524,16 @@ paths:
       - application/json
       description: get an user by ID
       parameters:
-      - description: User
-        in: body
-        name: json
+      - description: User's Email
+        in: formData
+        name: email
         required: true
-        schema:
-          $ref: '#/definitions/models.User'
+        type: string
+      - description: User's Username
+        in: formData
+        name: username
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -424,12 +550,31 @@ paths:
       - application/json
       description: create and store an user
       parameters:
-      - description: User
-        in: body
-        name: json
+      - description: User's Email
+        in: formData
+        name: email
         required: true
-        schema:
-          $ref: '#/definitions/models.User'
+        type: string
+      - description: User's Username
+        in: formData
+        name: username
+        required: true
+        type: string
+      - description: User's Age
+        in: formData
+        name: age
+        required: true
+        type: integer
+      - description: User's Password
+        in: formData
+        name: password
+        required: true
+        type: string
+      - description: User's Profile Image URL
+        in: formData
+        name: profile_image_url
+        required: true
+        type: string
       produces:
       - application/json
       responses:
