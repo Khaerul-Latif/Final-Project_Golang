@@ -813,9 +813,8 @@ const docTemplate = `{
     },
     "securityDefinitions": {
         "BearerAuth": {
-            "description": "Type \"Bearer\" followed by a space and JWT token.",
             "type": "apiKey",
-            "name": "Authorizations",
+            "name": "Authorization",
             "in": "header"
         }
     }
@@ -824,9 +823,9 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "",
-	BasePath:         "",
-	Schemes:          []string{"http", "https"},
+	Host:             "localhost:8080",
+	BasePath:         "/",
+	Schemes:          []string{},
 	Title:            "Final Project",
 	Description:      "Documentation Final Project",
 	InfoInstanceName: "swagger",

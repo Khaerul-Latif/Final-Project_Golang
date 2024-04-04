@@ -14,13 +14,11 @@ import (
 // @version 1.0
 // @description Documentation Final Project
 // @termOfService http://swagger.io/terms/
-
+// @schemes					http https
 // @securityDefinitions.apikey BearerAuth
 // @in header
-// @name Authorization
-
-// @host localhost:8080
-// @BasePath /
+// @name Authorizations
+// @description				Type "Bearer" followed by a space and JWT token.
 
 func main() {
 	errs := godotenv.Load(".env")

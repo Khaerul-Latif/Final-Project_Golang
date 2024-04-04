@@ -1,3 +1,4 @@
+basePath: /
 definitions:
   models.Comment:
     properties:
@@ -73,6 +74,7 @@ definitions:
       username:
         type: string
     type: object
+host: localhost:8080
 info:
   contact: {}
   description: Documentation Final Project
@@ -513,13 +515,9 @@ paths:
       summary: Create an user
       tags:
       - User
-schemes:
-- http
-- https
 securityDefinitions:
   BearerAuth:
-    description: Type "Bearer" followed by a space and JWT token.
     in: header
-    name: Authorizations
+    name: Authorization
     type: apiKey
 swagger: "2.0"

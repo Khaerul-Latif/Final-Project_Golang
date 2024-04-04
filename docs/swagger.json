@@ -1,4 +1,8 @@
 {
+    "schemes": [
+        "http",
+        "https"
+    ],
     "swagger": "2.0",
     "info": {
         "description": "Documentation Final Project",
@@ -6,8 +10,6 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "localhost:8080",
-    "basePath": "/",
     "paths": {
         "/comments": {
             "get": {
@@ -807,8 +809,9 @@
     },
     "securityDefinitions": {
         "BearerAuth": {
+            "description": "Type \"Bearer\" followed by a space and JWT token.",
             "type": "apiKey",
-            "name": "Authorization",
+            "name": "Authorizations",
             "in": "header"
         }
     }
