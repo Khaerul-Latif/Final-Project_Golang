@@ -15,12 +15,10 @@ import (
 // @Summary      Create an socialMedia
 // @Description  create and store an socialMedia
 // @Tags         Social Media
-// @Accept       json
-// @Produce      json
 // @Param        name formData string true "Social Media's Name"
-// @Param        social_media_url formData int true "Social Media's Social Media URL"
+// @Param        social_media_url formData string true "Social Media's Social Media URL"
 // @Success      201  {object}  models.SocialMedia
-// @Security     Bearer
+// @Security 	bearerAuth
 // @Router       /socialmedias  [post]
 func SocialMediaCreate(c *gin.Context) {
 	db := database.GetDB()
@@ -61,11 +59,15 @@ func SocialMediaCreate(c *gin.Context) {
 // @Summary      Get social media by ID
 // @Description  Retrieve social media by its ID
 // @Tags         Social Media
-// @Accept       json
-// @Produce      json
-// @Param        id   path   int  true  "Social Media ID"
+// @Param        socialMediaId   path   int  true  "Social Media ID"
 // @Success      200  {object}  models.SocialMedia
-// @Security     Bearer
+// @Security    BearerAuth
+// @SecurityDefinitions   Bearer:
+// @type  http
+// @scheme bearer
+// @bearerFormat Bearer <token>
+// @name  Authorization
+// @in    header
 // @Router       /socialmedias/{socialMediaId} [get]
 func GetSocialMediaByID(c *gin.Context) {
 	db := database.GetDB()
@@ -109,10 +111,8 @@ func GetSocialMediaByID(c *gin.Context) {
 // @Summary      Fetch socialMedias
 // @Description  get socialMedias
 // @Tags         Social Media
-// @Accept       json
-// @Produce      json
 // @Success      200	{object}	[]models.SocialMedia
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /socialmedias  [get]
 func SocialMediaList(c *gin.Context) {
 	db := database.GetDB()
@@ -155,13 +155,11 @@ func SocialMediaList(c *gin.Context) {
 // @Summary      Update an socialMedia
 // @Description  update an socialMedia by ID
 // @Tags         Social Media
-// @Accept       json
-// @Produce      json
-// @Param        id   path      int  true  "SocialMedia ID"
+// @Param        socialMediaId   path      int  true  "SocialMedia ID"
 // @Param        name formData string true "Social Media's Name"
-// @Param        social_media_url formData int true "Social Media's Social Media URL"
+// @Param        social_media_url formData string true "Social Media's Social Media URL"
 // @Success      200  {string}  string
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /socialmedias/{socialMediaId} [put]
 func SocialMediaUpdate(c *gin.Context) {
 	db := database.GetDB()
@@ -204,11 +202,9 @@ func SocialMediaUpdate(c *gin.Context) {
 // @Summary      Delete an socialMedia
 // @Description  delete an socialMedia by ID
 // @Tags         Social Media
-// @Accept       json
-// @Produce      json
-// @Param        id   path      int  true  "SocialMedia ID"
+// @Param        socialMediaId   path      int  true  "SocialMedia ID"
 // @Success      200  {string}  string
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /socialmedias/{socialMediaId} [delete]
 func SocialMediaDelete(c *gin.Context) {
 	db := database.GetDB()

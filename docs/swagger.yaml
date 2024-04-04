@@ -77,19 +77,13 @@ definitions:
 host: localhost:8080
 info:
   contact: {}
-  description: MyGram is a free photo sharing app written in Go. People can share,
-    view, and comment photos by everyone. Anyone can create an account by registering
-    an email address and selecting a username.
+  description: Documentation Final Project
   title: Final Project
   version: "1.0"
 paths:
   /comments:
     get:
-      consumes:
-      - application/json
       description: get comments
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
@@ -98,13 +92,11 @@ paths:
               $ref: '#/definitions/models.Comment'
             type: array
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Fetch comments
       tags:
       - Comment
     post:
-      consumes:
-      - application/json
       description: create and store an comment
       parameters:
       - description: Comments's Message
@@ -117,71 +109,59 @@ paths:
         name: photo_id
         required: true
         type: integer
-      produces:
-      - application/json
       responses:
         "201":
           description: Created
           schema:
             $ref: '#/definitions/models.Comment'
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Create an comment
       tags:
       - Comment
   /comments/{commentId}:
     delete:
-      consumes:
-      - application/json
       description: delete an comment by ID
       parameters:
       - description: Comment ID
         in: path
-        name: id
+        name: commentId
         required: true
         type: integer
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
           schema:
             type: string
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Delete an comment
       tags:
       - Comment
     get:
-      consumes:
-      - application/json
       description: Retrieve a comment by its ID
       parameters:
       - description: Comment ID
         in: path
-        name: id
+        name: commentId
         required: true
         type: integer
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
           schema:
             $ref: '#/definitions/models.Comment'
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Get a comment by ID
       tags:
       - Comment
     put:
-      consumes:
-      - application/json
       description: update an comment by ID
       parameters:
       - description: Comment ID
         in: path
-        name: id
+        name: commentId
         required: true
         type: integer
       - description: Comments's Message
@@ -189,25 +169,19 @@ paths:
         name: message
         required: true
         type: string
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Update an comment
       tags:
       - Comment
   /photos:
     get:
-      consumes:
-      - application/json
       description: get photos
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
@@ -216,13 +190,11 @@ paths:
               $ref: '#/definitions/models.Photo'
             type: array
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Fetch photos
       tags:
       - Photo
     post:
-      consumes:
-      - application/json
       description: create and store an photo
       parameters:
       - description: Photo's Title
@@ -239,72 +211,60 @@ paths:
         in: formData
         name: photo_url
         required: true
-        type: integer
-      produces:
-      - application/json
+        type: string
       responses:
         "201":
           description: Created
           schema:
             $ref: '#/definitions/models.Photo'
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Create an photo
       tags:
       - Photo
   /photos/{photoId}:
     delete:
-      consumes:
-      - application/json
       description: delete an photo by ID
       parameters:
       - description: Photo ID
         in: path
-        name: id
+        name: photoId
         required: true
         type: integer
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
           schema:
             type: string
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Delete an photo
       tags:
       - Photo
     get:
-      consumes:
-      - application/json
       description: Retrieve a photo by its ID
       parameters:
       - description: Photo ID
         in: path
-        name: id
+        name: photoId
         required: true
         type: integer
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Get a photo by ID
       tags:
       - Photo
     put:
-      consumes:
-      - application/json
       description: update an photo by ID
       parameters:
       - description: Photo ID
         in: path
-        name: id
+        name: photoId
         required: true
         type: integer
       - description: Photo's Title
@@ -321,26 +281,20 @@ paths:
         in: formData
         name: photo_url
         required: true
-        type: integer
-      produces:
-      - application/json
+        type: string
       responses:
         "200":
           description: OK
           schema:
             $ref: '#/definitions/models.Photo'
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Update an photo
       tags:
       - Photo
   /socialmedias:
     get:
-      consumes:
-      - application/json
       description: get socialMedias
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
@@ -349,13 +303,11 @@ paths:
               $ref: '#/definitions/models.SocialMedia'
             type: array
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Fetch socialMedias
       tags:
       - Social Media
     post:
-      consumes:
-      - application/json
       description: create and store an socialMedia
       parameters:
       - description: Social Media's Name
@@ -367,72 +319,60 @@ paths:
         in: formData
         name: social_media_url
         required: true
-        type: integer
-      produces:
-      - application/json
+        type: string
       responses:
         "201":
           description: Created
           schema:
             $ref: '#/definitions/models.SocialMedia'
       security:
-      - Bearer: []
+      - bearerAuth: []
       summary: Create an socialMedia
       tags:
       - Social Media
   /socialmedias/{socialMediaId}:
     delete:
-      consumes:
-      - application/json
       description: delete an socialMedia by ID
       parameters:
       - description: SocialMedia ID
         in: path
-        name: id
+        name: socialMediaId
         required: true
         type: integer
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
           schema:
             type: string
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Delete an socialMedia
       tags:
       - Social Media
     get:
-      consumes:
-      - application/json
       description: Retrieve social media by its ID
       parameters:
       - description: Social Media ID
         in: path
-        name: id
+        name: socialMediaId
         required: true
         type: integer
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
           schema:
             $ref: '#/definitions/models.SocialMedia'
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Get social media by ID
       tags:
       - Social Media
     put:
-      consumes:
-      - application/json
       description: update an socialMedia by ID
       parameters:
       - description: SocialMedia ID
         in: path
-        name: id
+        name: socialMediaId
         required: true
         type: integer
       - description: Social Media's Name
@@ -444,16 +384,14 @@ paths:
         in: formData
         name: social_media_url
         required: true
-        type: integer
-      produces:
-      - application/json
+        type: string
       responses:
         "200":
           description: OK
           schema:
             type: string
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Update an socialMedia
       tags:
       - Social Media
@@ -472,7 +410,7 @@ paths:
               type: object
             type: array
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Delete an user
       tags:
       - User
@@ -514,14 +452,12 @@ paths:
           schema:
             type: string
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Update an user
       tags:
       - User
   /users/login:
     post:
-      consumes:
-      - application/json
       description: get an user by ID
       parameters:
       - description: User's Email
@@ -529,13 +465,11 @@ paths:
         name: email
         required: true
         type: string
-      - description: User's Username
+      - description: User's Password
         in: formData
-        name: username
+        name: password
         required: true
         type: string
-      produces:
-      - application/json
       responses:
         "200":
           description: OK
@@ -546,8 +480,6 @@ paths:
       - User
   /users/register:
     post:
-      consumes:
-      - application/json
       description: create and store an user
       parameters:
       - description: User's Email
@@ -575,8 +507,6 @@ paths:
         name: profile_image_url
         required: true
         type: string
-      produces:
-      - application/json
       responses:
         "201":
           description: Created
@@ -586,8 +516,7 @@ paths:
       tags:
       - User
 securityDefinitions:
-  Bearer:
-    description: Description for what is this security definition being used
+  BearerAuth:
     in: header
     name: Authorization
     type: apiKey

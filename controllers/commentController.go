@@ -15,12 +15,10 @@ import (
 // @Summary      Create an comment
 // @Description  create and store an comment
 // @Tags         Comment
-// @Accept       json
-// @Produce      json
 // @Param        message formData string true "Comments's Message"
 // @Param        photo_id formData int true "Comments's Photo ID"
 // @Success      201  {object}  models.Comment
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /comments      [post]
 func CommentCreate(c *gin.Context) {
 	db := database.GetDB()
@@ -61,10 +59,8 @@ func CommentCreate(c *gin.Context) {
 // @Summary      Fetch comments
 // @Description  get comments
 // @Tags         Comment
-// @Accept       json
-// @Produce      json
 // @Success      200	{object}	[]models.Comment
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /comments      [get]
 func CommentList(c *gin.Context) {
 	db := database.GetDB()
@@ -114,11 +110,9 @@ func CommentList(c *gin.Context) {
 // @Summary      Get a comment by ID
 // @Description  Retrieve a comment by its ID
 // @Tags         Comment
-// @Accept       json
-// @Produce      json
-// @Param        id   path      int  true  "Comment ID"
+// @Param        commentId   path      int  true  "Comment ID"
 // @Success      200  {object}  models.Comment
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /comments/{commentId} [get]
 func CommentByID(c *gin.Context) {
 	db := database.GetDB()
@@ -165,12 +159,10 @@ func CommentByID(c *gin.Context) {
 // @Summary      Update an comment
 // @Description  update an comment by ID
 // @Tags         Comment
-// @Accept       json
-// @Produce      json
-// @Param        id   path      int  true  "Comment ID"
+// @Param        commentId   path      int  true  "Comment ID"
 // @Param        message formData string true "Comments's Message"
 // @Success      200  {object}  models.Photo
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /comments/{commentId} [put]
 func CommentUpdate(c *gin.Context) {
 	db := database.GetDB()
@@ -232,11 +224,9 @@ func CommentUpdate(c *gin.Context) {
 // @Summary      Delete an comment
 // @Description  delete an comment by ID
 // @Tags         Comment
-// @Accept       json
-// @Produce      json
-// @Param        id   path      int  true  "Comment ID"
+// @Param        commentId   path      int  true  "Comment ID"
 // @Success      200  {string}  string
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /comments/{commentId} [delete]
 func CommentDelete(c *gin.Context) {
 	db := database.GetDB()

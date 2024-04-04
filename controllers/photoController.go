@@ -20,13 +20,11 @@ type User struct {
 // @Summary      Create an photo
 // @Description  create and store an photo
 // @Tags         Photo
-// @Accept       json
-// @Produce      json
 // @Param        title formData string true "Photo's Title"
 // @Param        caption formData string true "Photo's Caption"
-// @Param        photo_url formData int true "Photo's Photo URL"
+// @Param        photo_url formData string true "Photo's Photo URL"
 // @Success      201  {object}  models.Photo
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /photos        [post]
 func PhotoCreate(c *gin.Context) {
 	db := database.GetDB()
@@ -68,10 +66,8 @@ func PhotoCreate(c *gin.Context) {
 // @Summary      Fetch photos
 // @Description  get photos
 // @Tags         Photo
-// @Accept       json
-// @Produce      json
 // @Success      200	{object}	[]models.Photo
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /photos        [get]
 func PhotoGetAll(c *gin.Context) {
 	db := database.GetDB()
@@ -116,11 +112,9 @@ func PhotoGetAll(c *gin.Context) {
 // @Summary      Get a photo by ID
 // @Description  Retrieve a photo by its ID
 // @Tags         Photo
-// @Accept       json
-// @Produce      json
-// @Param        id   path      int  true  "Photo ID"
+// @Param        photoId   path      int  true  "Photo ID"
 // @Success      200  {object}  models.Photo
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /photos/{photoId}   [get]
 func PhotoGetByID(c *gin.Context) {
 	db := database.GetDB()
@@ -159,14 +153,12 @@ func PhotoGetByID(c *gin.Context) {
 // @Summary      Update an photo
 // @Description  update an photo by ID
 // @Tags         Photo
-// @Accept       json
-// @Produce      json
-// @Param        id   path      int  true  "Photo ID"
+// @Param        photoId   path      int  true  "Photo ID"
 // @Param        title formData string true "Photo's Title"
 // @Param        caption formData string true "Photo's Caption"
-// @Param        photo_url formData int true "Photo's Photo URL"
+// @Param        photo_url formData string true "Photo's Photo URL"
 // @Success      200  {object}  models.Photo
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /photos/{photoId}   [put]
 func PhotoUpdate(c *gin.Context) {
 	var data map[string]interface{}
@@ -210,11 +202,9 @@ func PhotoUpdate(c *gin.Context) {
 // @Summary      Delete an photo
 // @Description  delete an photo by ID
 // @Tags         Photo
-// @Accept       json
-// @Produce      json
-// @Param        id   path      int  true  "Photo ID"
+// @Param        photoId   path      int  true  "Photo ID"
 // @Success      200  {string}  string
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /photos/{photoId}   [delete]
 func PhotoDelete(c *gin.Context) {
 	db := database.GetDB()

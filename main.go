@@ -10,18 +10,18 @@ import (
 	"github.com/joho/godotenv"
 )
 
-
 // @title Final Project
 // @version 1.0
-// @description MyGram is a free photo sharing app written in Go. People can share, view, and comment photos by everyone. Anyone can create an account by registering an email address and selecting a username.
+// @description Documentation Final Project
 // @termOfService http://swagger.io/terms/
+
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
+
 // @host localhost:8080
 // @BasePath /
 
-// @securityDefinitions.apikey  Bearer
-// @in                          header
-// @name                        Authorization
-// @description					        Description for what is this security definition being used
 func main() {
 	errs := godotenv.Load(".env")
 	if errs != nil {

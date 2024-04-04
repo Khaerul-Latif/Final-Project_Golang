@@ -19,16 +19,10 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "get comments",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Comment"
                 ],
@@ -48,16 +42,10 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "create and store an comment",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Comment"
                 ],
@@ -92,16 +80,10 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "Retrieve a comment by its ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Comment"
                 ],
@@ -110,7 +92,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "Comment ID",
-                        "name": "id",
+                        "name": "commentId",
                         "in": "path",
                         "required": true
                     }
@@ -127,16 +109,10 @@ const docTemplate = `{
             "put": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "update an comment by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Comment"
                 ],
@@ -145,7 +121,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "Comment ID",
-                        "name": "id",
+                        "name": "commentId",
                         "in": "path",
                         "required": true
                     },
@@ -169,16 +145,10 @@ const docTemplate = `{
             "delete": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "delete an comment by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Comment"
                 ],
@@ -187,7 +157,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "Comment ID",
-                        "name": "id",
+                        "name": "commentId",
                         "in": "path",
                         "required": true
                     }
@@ -206,16 +176,10 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "get photos",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Photo"
                 ],
@@ -235,16 +199,10 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "create and store an photo",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Photo"
                 ],
@@ -265,7 +223,7 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Photo's Photo URL",
                         "name": "photo_url",
                         "in": "formData",
@@ -286,16 +244,10 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "Retrieve a photo by its ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Photo"
                 ],
@@ -304,7 +256,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "Photo ID",
-                        "name": "id",
+                        "name": "photoId",
                         "in": "path",
                         "required": true
                     }
@@ -321,16 +273,10 @@ const docTemplate = `{
             "put": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "update an photo by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Photo"
                 ],
@@ -339,7 +285,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "Photo ID",
-                        "name": "id",
+                        "name": "photoId",
                         "in": "path",
                         "required": true
                     },
@@ -358,7 +304,7 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Photo's Photo URL",
                         "name": "photo_url",
                         "in": "formData",
@@ -377,16 +323,10 @@ const docTemplate = `{
             "delete": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "delete an photo by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Photo"
                 ],
@@ -395,7 +335,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "Photo ID",
-                        "name": "id",
+                        "name": "photoId",
                         "in": "path",
                         "required": true
                     }
@@ -414,16 +354,10 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "get socialMedias",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Social Media"
                 ],
@@ -443,16 +377,10 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "Bearer": []
+                        "bearerAuth": []
                     }
                 ],
                 "description": "create and store an socialMedia",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Social Media"
                 ],
@@ -466,7 +394,7 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Social Media's Social Media URL",
                         "name": "social_media_url",
                         "in": "formData",
@@ -487,16 +415,10 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "Retrieve social media by its ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Social Media"
                 ],
@@ -505,7 +427,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "Social Media ID",
-                        "name": "id",
+                        "name": "socialMediaId",
                         "in": "path",
                         "required": true
                     }
@@ -522,16 +444,10 @@ const docTemplate = `{
             "put": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "update an socialMedia by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Social Media"
                 ],
@@ -540,7 +456,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "SocialMedia ID",
-                        "name": "id",
+                        "name": "socialMediaId",
                         "in": "path",
                         "required": true
                     },
@@ -552,7 +468,7 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Social Media's Social Media URL",
                         "name": "social_media_url",
                         "in": "formData",
@@ -571,16 +487,10 @@ const docTemplate = `{
             "delete": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "delete an socialMedia by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "Social Media"
                 ],
@@ -589,7 +499,7 @@ const docTemplate = `{
                     {
                         "type": "integer",
                         "description": "SocialMedia ID",
-                        "name": "id",
+                        "name": "socialMediaId",
                         "in": "path",
                         "required": true
                     }
@@ -608,7 +518,7 @@ const docTemplate = `{
             "put": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "update an user by ID",
@@ -671,7 +581,7 @@ const docTemplate = `{
             "delete": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "delete an user by ID",
@@ -701,12 +611,6 @@ const docTemplate = `{
         "/users/login": {
             "post": {
                 "description": "get an user by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "User"
                 ],
@@ -721,8 +625,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "User's Username",
-                        "name": "username",
+                        "description": "User's Password",
+                        "name": "password",
                         "in": "formData",
                         "required": true
                     }
@@ -740,12 +644,6 @@ const docTemplate = `{
         "/users/register": {
             "post": {
                 "description": "create and store an user",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "tags": [
                     "User"
                 ],
@@ -914,8 +812,7 @@ const docTemplate = `{
         }
     },
     "securityDefinitions": {
-        "Bearer": {
-            "description": "Description for what is this security definition being used",
+        "BearerAuth": {
             "type": "apiKey",
             "name": "Authorization",
             "in": "header"
@@ -930,7 +827,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Final Project",
-	Description:      "MyGram is a free photo sharing app written in Go. People can share, view, and comment photos by everyone. Anyone can create an account by registering an email address and selecting a username.",
+	Description:      "Documentation Final Project",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

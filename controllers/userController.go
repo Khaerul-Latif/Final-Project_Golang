@@ -18,8 +18,6 @@ var appJSON = "application/json"
 // @Summary      Create an user
 // @Description  create and store an user
 // @Tags         User
-// @Accept       json
-// @Produce      json
 // @Param        email formData string true "User's Email"
 // @Param        username formData string true "User's Username"
 // @Param        age formData int true "User's Age"
@@ -84,10 +82,8 @@ func UserRegister(c *gin.Context) {
 // @Summary      Show an user
 // @Description  get an user by ID
 // @Tags         User
-// @Accept       json
-// @Produce      json
 // @Param        email formData string true "User's Email"
-// @Param        username formData string true "User's Username"
+// @Param        password formData string true "User's Password"
 // @Success      200  {object}  models.User
 // @Router       /users/login	  [post]
 func UserLogin(c *gin.Context) {
@@ -146,7 +142,7 @@ func UserLogin(c *gin.Context) {
 // @Param        password formData string true "User's Password"
 // @Param        profile_image_url formData string true "User's Profile Image URL"
 // @Success      200  {string}  models.User
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /users [put]
 func UserUpdate(c *gin.Context) {
 	db := database.GetDB()
@@ -226,7 +222,7 @@ func UserUpdate(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Success      200  {object}  []interface{}  "Your comment has been successfully deleted"
-// @Security     Bearer
+// @Security    BearerAuth
 // @Router       /users					[delete]
 func UserDelete(ctx *gin.Context) {
 	userData, exists := ctx.Get("userData")
